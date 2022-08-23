@@ -21,11 +21,24 @@ describe('team', () => {
   })
 
   describe('getAllTeam', async () => {
-    it('sucesso', async () => {
+    it('sucesso getAllTeam', async () => {
         sinon.stub(Team, 'findAll').resolves([mock])
 
         const response = await chai.request(app).get('/teams')
         expect(response.status).to.equal(200)
+    })
+  })
+
+  describe('getById', () => {
+    it('sucesso getById', async () => {
+        sinon.stub(Team, 'findByPk').resolves(mock as any)
+
+        const response = await chai.request(app).get('/teams/1')
+
+        const team = response.body
+
+        expect(team.teamName).to.equal(mock.teamName)
+        expect(team.id).to.equal(mock.id)
     })
   })
 
