@@ -19,5 +19,5 @@
     }
   },
   "include": ["src/**/*", "src/database/migrations/.js"],
-  "exclude": ["src/tests"]
+  "exclude": ["src/excluir"]
 }
