@@ -1,9 +1,11 @@
 import * as express from 'express';
+import TeamController from './controllers/teamController';
 import UserController from './controllers/userController';
 
 class App {
   public app: express.Express;
   private userController = new UserController();
+  public teamController = new TeamController();
 
   constructor() {
     this.app = express();
@@ -13,6 +15,7 @@ class App {
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
     this.app.post('/login', this.userController.login);
+    this.app.get('/teams', this.teamController.getAllTeam);
   }
 
   private config():void {
