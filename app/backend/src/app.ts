@@ -16,6 +16,7 @@ class App {
     this.app.get('/', (req, res) => res.json({ ok: true }));
     this.app.post('/login', this.userController.login);
     this.app.get('/teams', this.teamController.getAllTeam);
+    this.app.get('/teams/:id', this.teamController.getById);
   }
 
   private config():void {
