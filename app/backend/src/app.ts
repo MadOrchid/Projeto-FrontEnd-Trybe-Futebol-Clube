@@ -1,7 +1,9 @@
 import * as express from 'express';
+import UserController from './controllers/userController';
 
 class App {
   public app: express.Express;
+  private userController = new UserController();
 
   constructor() {
     this.app = express();
@@ -10,6 +12,7 @@ class App {
 
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
+    this.app.post('/login', this.userController.login);
   }
 
   private config():void {
@@ -33,5 +36,3 @@ export { App };
 
 // A execução dos testes de cobertura depende dessa exportação
 export const { app } = new App();
-
-// oi
