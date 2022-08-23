@@ -24,7 +24,7 @@ describe('login', () => {
   })
 
   it('login sucess', async () => {
-    sinon.stub(User, 'findOne').resolves(mock);
+    sinon.stub(User, 'findOne').resolves(mock as any);
 
     const response = await chai.request(app).post('/login');
     expect(response.body).to.have.key('token');
