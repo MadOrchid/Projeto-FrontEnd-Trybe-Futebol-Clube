@@ -13,7 +13,7 @@ export default class MatchesServicece {
         },
         {
           model: Team,
-          as: 'teamHome',
+          as: 'teamAway',
           attributes: ['teamName'],
         },
       ],

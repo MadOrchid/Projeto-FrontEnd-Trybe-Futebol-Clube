@@ -6,24 +6,20 @@ export default class Team extends Model {
   public teamName: string;
 }
 
-Team.init(
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    teamName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-
+Team.init({
+  id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true,
   },
-  {
-    underscored: true,
-    sequelize: db,
-    timestamps: false,
-    tableName: 'teams',
+  teamName: {
+    type: DataTypes.STRING,
+    allowNull: false,
   },
-);
+}, {
+  underscored: true,
+  sequelize: db,
+  timestamps: false,
+  tableName: 'teams',
+});
