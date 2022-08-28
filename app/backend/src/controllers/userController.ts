@@ -1,4 +1,3 @@
-import 'dotenv/config';
 import { Request, Response } from 'express';
 import UserService from '../services/userService';
 
@@ -9,20 +8,16 @@ export default class UserController {
     this.service = new UserService();
   }
 
-  public login = async (req: Request, res: Response) => {
-    const { email, password } = req.body;
+  public login = async (request: Request, response: Response) => {
+    const { email, password } = request.body;
     await this.service.validateLogin(email, password);
-
-    if (!email || !password) {
-      return res.status(400).json({ message: 'All fields must be filled' });
-    }
     const token = await this.service.login(email, password);
-    res.status(200).json({ token });
+    response.status(200).json({ token });
   };
 
-  public validate = async (req: Request, res:Response) => {
-    const { authorization } = req.headers;
+  public validate = async (request: Request, response: Response) => {
+    const { authorization } = request.headers;
     const user = await this.service.validate(String(authorization));
-    res.status(200).json({ role: user?.role });
+    response.status(200).json({ role: user?.role });
   };
 }

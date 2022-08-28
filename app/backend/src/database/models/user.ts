@@ -5,7 +5,7 @@ export default class User extends Model {
   public username: string;
   public role: string;
   public email: string;
-  public passowrd: string;
+  public password: string;
 }
 
 User.init({

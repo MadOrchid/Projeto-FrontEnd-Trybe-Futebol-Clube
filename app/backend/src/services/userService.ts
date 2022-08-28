@@ -1,10 +1,11 @@
+import { compare } from 'bcryptjs';
 import 'dotenv/config';
 import Joi = require('joi');
 import { sign, verify } from 'jsonwebtoken';
 import User from '../database/models/user';
 
-interface Token {
-  email:string
+interface IToken {
+  email:string;
 }
 
 export default class UserService {
@@ -26,13 +27,20 @@ export default class UserService {
   };
 
   public login = async (email:string, password:string): Promise<string> => {
+    const user = await this.getEmail(email);
+
+    if (!user || !compare(password, user.password)) {
+      const error = new Error('Incorrect email or password');
+      throw error;
+    }
+
     const token = sign({ email, password }, process.env.JWT_SECRET || 'jwt_secret');
     return token;
   };
 
   public validate = async (authorization:string): Promise<User | null> => {
     const token = verify(authorization, process.env.JWT_SECRET || 'jwt_secret');
-    const { email } = token as Token;
+    const { email } = token as IToken;
     const user: User | null = await this.getEmail(email);
     return user;
   };
