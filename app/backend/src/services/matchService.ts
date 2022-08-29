@@ -6,16 +6,8 @@ export default class MatchesServicece {
   public getAll = async () => {
     const matches = await Matches.findAll({
       include: [
-        {
-          model: Team,
-          as: 'teamHome',
-          attributes: ['teamName'],
-        },
-        {
-          model: Team,
-          as: 'teamAway',
-          attributes: ['teamName'],
-        },
+        { model: Team, as: 'teamHome', attributes: ['teamName'] },
+        { model: Team, as: 'teamAway', attributes: ['teamName'] },
       ],
     });
     return matches;

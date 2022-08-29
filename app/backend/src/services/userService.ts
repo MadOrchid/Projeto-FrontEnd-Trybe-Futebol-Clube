@@ -1,4 +1,3 @@
-import { compare } from 'bcryptjs';
 import 'dotenv/config';
 import { sign, verify } from 'jsonwebtoken';
 import User from '../database/models/user';
