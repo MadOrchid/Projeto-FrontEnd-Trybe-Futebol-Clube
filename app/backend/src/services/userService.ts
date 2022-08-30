@@ -1,6 +1,8 @@
+import { compareSync } from 'bcryptjs';
 import 'dotenv/config';
 import { sign, verify } from 'jsonwebtoken';
 import User from '../database/models/user';
+import ErrorHandler from '../middleware/middleware';
 
 export interface IToken {
   email: string
@@ -8,15 +10,15 @@ export interface IToken {
 
 export default class Userervice {
   public login = async (email: string, password: string) => {
-    /* const user = await User.findOne({ where: { email } });
+    const user = await User.findOne({ where: { email } });
     if (!user) {
-      throw new Error('Incorrect email or password');
+      throw new ErrorHandler(401, 'Incorrect email or password');
     }
 
-    const comparePassword = await compare(password, user.password);
+    const comparePassword = compareSync(password, user.password);
     if (!comparePassword) {
-      throw new Error('Incorrect email or password');
-    } */
+      throw new ErrorHandler(401, 'Incorrect email or password');
+    }
 
     const token = sign({ email, password }, process.env.JWT_SECRET || 'jwt_secret');
     return token;
@@ -30,7 +32,7 @@ export default class Userervice {
       const user = await User.findOne({ where: { email } });
       return user;
     } catch (error) {
-      throw new Error('Token must be a valid token');
+      throw new ErrorHandler(401, 'Token must be a valid token');
     }
   };
 }

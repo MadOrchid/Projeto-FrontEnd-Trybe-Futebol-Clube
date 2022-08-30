@@ -1,5 +1,6 @@
 import * as express from 'express';
-import middleware from './middleware/middleware';
+import 'express-async-errors';
+// import { middlewareError } from './middleware/middleware';
 import matchesRouter from './routers/matches.router';
 import teamRouter from './routers/teams.router';
 import userRouter from './routers/user.router';
@@ -17,7 +18,7 @@ class App {
     this.app.use('/login', userRouter);
     this.app.use('/teams', teamRouter);
     this.app.use('/matches', matchesRouter);
-    this.app.use(middleware);
+    // this.app.use(middlewareError);
   }
 
   private config():void {

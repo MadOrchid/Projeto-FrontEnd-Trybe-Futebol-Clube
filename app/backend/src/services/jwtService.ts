@@ -2,7 +2,7 @@ import * as jwt from 'jsonwebtoken';
 import { IToken } from './userService';
 
 export default class JwtService {
-  static sign(payload : { email:string }): string {
+  static sign(payload : { email:string, password:string }): string {
     return jwt.sign(payload, 'jwt_secret');
   }
 
