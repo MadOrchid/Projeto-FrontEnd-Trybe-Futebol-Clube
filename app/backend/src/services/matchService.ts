@@ -17,4 +17,9 @@ export default class MatchesServicece {
     const match: Matches = await Matches.create({ ...matchData, inProgress: 1 });
     return match;
   }
+
+  static async updateMatch(id: number): Promise<boolean> {
+    await Matches.update({ inProgress: 0 }, { where: { id } });
+    return true;
+  }
 }
