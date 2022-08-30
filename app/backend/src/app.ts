@@ -1,5 +1,4 @@
 import * as express from 'express';
-import MatchesController from './controllers/matchesController';
 import middleware from './middleware/middleware';
 import matchesRouter from './routers/matches.router';
 import teamRouter from './routers/teams.router';
@@ -7,7 +6,6 @@ import userRouter from './routers/user.router';
 
 class App {
   public app: express.Express;
-  public matchesController = new MatchesController();
 
   constructor() {
     this.app = express();

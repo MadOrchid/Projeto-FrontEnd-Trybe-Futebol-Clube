@@ -3,7 +3,7 @@ import Matches from '../database/models/matches';
 import Team from '../database/models/team';
 
 export default class MatchesServicece {
-  public getAll = async () => {
+  static async getAll() : Promise<Matches[]> {
     const matches = await Matches.findAll({
       include: [
         { model: Team, as: 'teamHome', attributes: ['teamName'] },
@@ -11,5 +11,10 @@ export default class MatchesServicece {
       ],
     });
     return matches;
-  };
+  }
+
+  static async newMatch(matchData: Matches): Promise<Matches> {
+    const match: Matches = await Matches.create({ ...matchData, inProgress: 1 });
+    return match;
+  }
 }

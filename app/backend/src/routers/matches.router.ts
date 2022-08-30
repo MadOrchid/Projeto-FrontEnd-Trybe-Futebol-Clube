@@ -2,8 +2,8 @@ import { Router } from 'express';
 import MatchesController from '../controllers/matchesController';
 
 const matchesRouter = Router();
-const matchesController = new MatchesController();
 
-matchesRouter.get('/', (req, res) => matchesController.getAll(req, res));
+matchesRouter.get('/', (req, res) => MatchesController.getAll(req, res));
+matchesRouter.post('/', (req, res) => MatchesController.newMatch(req, res));
 
 export default matchesRouter;
