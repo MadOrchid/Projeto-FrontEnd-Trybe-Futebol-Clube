@@ -22,4 +22,11 @@ export default class MatchesServicece {
     await Matches.update({ inProgress: 0 }, { where: { id } });
     return true;
   }
+
+  static async update(id: number, homeTeamGoals: number, awayTeamGoals: number) {
+    await Matches.update(
+      { homeTeamGoals, awayTeamGoals },
+      { where: { id } },
+    );
+  }
 }

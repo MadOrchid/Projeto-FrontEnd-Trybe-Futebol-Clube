@@ -42,4 +42,11 @@ export default class MatchesController {
       res.status(200).json('Finished');
     }
   }
+
+  static async update(req:Request, res:Response) {
+    const { id } = req.params;
+    const { body } = req;
+    await MatchesServicece.update(+id, body.homeTeamGoals, body.awayTeamGoals);
+    res.json({ message: 'Updated' });
+  }
 }
