@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import JwtService from '../services/jwtService';
 import MatchesServicece from '../services/matchService';
 import TeamService from '../services/teamService';
 
@@ -10,6 +11,7 @@ export default class MatchesController {
 
   static async newMatch(req: Request, res: Response): Promise<void> {
     const { homeTeam, awayTeam } = req.body;
+    const { authorization } = req.headers;
 
     if (homeTeam === awayTeam) {
       res.status(401)
@@ -22,6 +24,11 @@ export default class MatchesController {
 
     if (!team) {
       res.status(404).json('There is no team with such id');
+    }
+
+    if (typeof authorization === 'string') {
+      const validate = JwtService.confirToken(authorization);
+      if (!validate) res.status(401).json({ message: 'Token must be a valid token' });
     }
   }
 

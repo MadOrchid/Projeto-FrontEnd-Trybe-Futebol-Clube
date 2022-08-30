@@ -2,7 +2,7 @@ import 'dotenv/config';
 import { sign, verify } from 'jsonwebtoken';
 import User from '../database/models/user';
 
-interface IToken {
+export interface IToken {
   email: string
 }
 
