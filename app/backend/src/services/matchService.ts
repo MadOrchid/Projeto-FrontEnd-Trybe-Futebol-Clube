@@ -29,4 +29,15 @@ export default class MatchesServicece {
       { where: { id } },
     );
   }
+
+  static async getAllFinished(): Promise<Matches[]> {
+    const matchList = await Matches.findAll({
+      include: [
+        { model: Team, as: 'teamHome', attributes: ['teamName'] },
+        { model: Team, as: 'teamAway', attributes: ['teamName'] },
+      ],
+      where: { inProgress: 0 },
+    });
+    return matchList;
+  }
 }

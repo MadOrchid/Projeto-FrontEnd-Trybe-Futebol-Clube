@@ -10,4 +10,10 @@ export default class TeamService {
     const team = await Team.findByPk(id);
     return team;
   }
+
+  static async listTeamsId() : Promise<number[]> {
+    const listRawData = await Team.findAll({ attributes: ['id'] });
+    const idList = listRawData.map((team) => team.id);
+    return idList;
+  }
 }
