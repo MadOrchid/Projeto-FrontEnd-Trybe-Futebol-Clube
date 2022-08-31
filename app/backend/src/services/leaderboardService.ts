@@ -80,8 +80,10 @@ export default class LeaderboardService {
       goalsFavor: home.goalsFavor + away.goalsFavor,
       goalsOwn: home.goalsOwn + away.goalsOwn,
       goalsBalance: 0,
-      efficiency: '0, 00',
-    };
+      efficiency: '0, 00' };
+    leaderboard.totalPoints = (leaderboard.totalVictories * 3) + leaderboard.totalDraws;
+    leaderboard.goalsBalance = leaderboard.goalsFavor - leaderboard.goalsOwn;
+    leaderboard.efficiency = this.efficiencyCal(leaderboard.totalPoints, leaderboard.totalGames);
     return leaderboard;
   }
 }
