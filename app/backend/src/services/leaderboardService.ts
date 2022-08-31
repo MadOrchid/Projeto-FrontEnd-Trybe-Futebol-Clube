@@ -48,4 +48,24 @@ export default class LeaderboardService {
     || b.goalsFavor - a.goalsFavor
     || a.goalsOwn - b.goalsOwn);
   }
+
+  static tableAwayPoint(match: Match[]) {
+    const leaderboard = {
+      name: match[0].teamAway.teamName,
+      totalGames: match.length,
+      totalPoints: 0,
+      totalVictories: match.filter((game: Match) => game.awayTeamGoals > game.homeTeamGoals).length,
+      totalDraws: match.filter((game: Match) => game.awayTeamGoals === game.homeTeamGoals).length,
+      totalLosses: match.filter((game: Match) => game.awayTeamGoals < game.homeTeamGoals).length,
+      goalsFavor: match.reduce((acc:number, game: Match) => acc + game.awayTeamGoals, 0),
+      goalsOwn: match.reduce((acc:number, game: Match) => acc + game.homeTeamGoals, 0),
+      goalsBalance: 0,
+      efficiency: '0, 00' };
+
+    leaderboard.totalPoints = (leaderboard.totalVictories * 3) + leaderboard.totalDraws;
+    leaderboard.goalsBalance = leaderboard.goalsFavor - leaderboard.goalsOwn;
+    leaderboard.efficiency = this.efficiencyCal(leaderboard.totalPoints, leaderboard.totalGames);
+
+    return leaderboard;
+  }
 }

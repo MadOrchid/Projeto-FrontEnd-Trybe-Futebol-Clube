@@ -15,4 +15,16 @@ export default class LeaderboardController {
     const orderedLeaderboard = LeaderboardService.orderBoard(board);
     res.status(200).json(orderedLeaderboard);
   }
+
+  static async listAway(req: Request, res: Response) {
+    const teamList = await TeamService.listTeamsId();
+    const matchList = await MatchesServicece.getAllFinished();
+
+    const matches = teamList.map((team) =>
+      matchList.filter((match) => match.awayTeam === team));
+
+    const board = matches.map((team) => LeaderboardService.tableAwayPoint(team));
+    const orderedLeaderboard = LeaderboardService.orderBoard(board);
+    res.status(200).json(orderedLeaderboard);
+  }
 }
