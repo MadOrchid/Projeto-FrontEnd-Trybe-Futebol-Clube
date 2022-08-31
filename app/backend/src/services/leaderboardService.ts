@@ -68,4 +68,20 @@ export default class LeaderboardService {
 
     return leaderboard;
   }
+
+  static socer(home: IBoard, away: IBoard) {
+    const leaderboard = {
+      name: home.name,
+      totalGames: home.totalGames + away.totalGames,
+      totalPoints: home.totalVictories + away.totalPoints,
+      totalVictories: home.totalVictories + away.totalVictories,
+      totalDraws: home.totalDraws + away.totalDraws,
+      totalLosses: home.totalLosses + away.totalLosses,
+      goalsFavor: home.goalsFavor + away.goalsFavor,
+      goalsOwn: home.goalsOwn + away.goalsOwn,
+      goalsBalance: 0,
+      efficiency: '0, 00',
+    };
+    return leaderboard;
+  }
 }
